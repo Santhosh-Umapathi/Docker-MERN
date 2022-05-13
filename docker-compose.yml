@@ -15,7 +15,7 @@ services:
       - ./server:/app
     environment:
       - REDIS_HOST=redis
-      - REDIS_PORT=6397
+      - REDIS_PORT=6379
       - PGUSER=postgres
       - PGHOST=postgres
       - PGDATABASE=postgres
@@ -39,7 +39,7 @@ services:
       - ./worker:/app
     environment:
       - REDIS_HOST=redis
-      - REDIS_PORT=6397
+      - REDIS_PORT=6379
   nginx:
     restart: always
     build:
