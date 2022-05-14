@@ -20,10 +20,10 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Push to Docker Hub
-  - docker push docker-mern-client
-  - docker push docker-mern-nginx
-  - docker push docker-mern-server
-  - docker push docker-mern-worker
+  - docker push appymango/docker-mern-client
+  - docker push appymango/docker-mern-nginx
+  - docker push appymango/docker-mern-server
+  - docker push appymango/docker-mern-worker
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "eu-south-1"
