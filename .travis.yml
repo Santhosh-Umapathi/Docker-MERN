@@ -1,0 +1,37 @@
+sudo: required
+language: generic
+services:
+  - docker
+## Built Tests Image
+before_install:
+  - docker build -t appymango/docker-mern-tests -f ./client/Dockerfile.dev ./client
+## Run Tests
+script:
+  - docker run -e CI=true appymango/docker-mern-tests npm test
+
+# Build all projects - Production Images & Push to Docker Hub
+after_success:
+  - docker build -t appymango/docker-mern-client ./client
+  - docker build -t appymango/docker-mern-nginx ./nginx
+  - docker build -t appymango/docker-mern-server ./server
+  - docker build -t appymango/docker-mern-worker ./worker
+
+  # Authorize Docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Push to Docker Hub
+  - docker push docker-mern-client
+  - docker push docker-mern-nginx
+  - docker push docker-mern-server
+  - docker push docker-mern-worker
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "eu-south-1"
+#   app: "docker-react"
+#   env: "Dockerreact-env"
+#   bucket_name: "elasticbeanstalk-eu-south-1-469669170709"
+#   bucket_path: "docker-react"
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
