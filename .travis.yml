@@ -24,14 +24,14 @@ after_success:
   - docker push appymango/docker-mern-nginx
   - docker push appymango/docker-mern-server
   - docker push appymango/docker-mern-worker
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "eu-south-1"
-#   app: "docker-react"
-#   env: "Dockerreact-env"
-#   bucket_name: "elasticbeanstalk-eu-south-1-469669170709"
-#   bucket_path: "docker-react"
-#   on:
-#     branch: master
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker-mern"
+  env: "Dockermern-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-469669170709"
+  bucket_path: "docker-mern"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
