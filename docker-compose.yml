@@ -1,11 +1,11 @@
 version: "3"
 services:
   client:
-    image: "appymango/docker-mern-client"
+    image: "appymango/docker-mern-client:latest"
     mem_limit: 128m
     hostname: client
   server:
-    image: "appymango/docker-mern-server"
+    image: "appymango/docker-mern-server:latest"
     mem_limit: 128m
     hostname: api
     environment:
@@ -17,14 +17,14 @@ services:
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
-    image: "appymango/docker-mern-worker"
+    image: "appymango/docker-mern-worker:latest"
     mem_limit: 128m
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: "appymango/docker-mern-nginx"
+    image: "appymango/docker-mern-nginx:latest"
     mem_limit: 128m
     hostname: nginx
     ports:
