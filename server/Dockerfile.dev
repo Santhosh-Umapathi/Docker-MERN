@@ -1,13 +1,13 @@
 # Development
 
 ## Base Image
-FROM node:14.14.0-alpine
+FROM node:16-alpine
 
 ## Specify the base working directory
 WORKDIR '/app'
 
 ## Run Commands - Install Dependencies
-COPY package.json .
+COPY ./package.json ./
 RUN npm install
 COPY . .
 

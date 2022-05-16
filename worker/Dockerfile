@@ -1,13 +1,13 @@
 # Production
 
 ## Base Image
-FROM node:14.14.0-alpine
+FROM node:alpine
 
 ## Specify the base working directory
 WORKDIR '/app'
 
 ## Run Commands - Install Dependencies
-COPY package.json .
+COPY ./package.json ./
 RUN npm install
 COPY . .
 

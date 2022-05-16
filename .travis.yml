@@ -1,29 +1,28 @@
 sudo: required
 language: generic
+
 services:
   - docker
 ## Built Tests Image
 before_install:
-  - docker build -t appymango/docker-mern-tests -f ./client/Dockerfile.dev ./client
+  - docker build -t appymango/docker-mern-test -f ./client/Dockerfile.dev ./client
 ## Run Tests
 script:
-  - docker run -e CI=true appymango/docker-mern-tests npm test
-
+  - docker run -e CI=true appymango/docker-mern-test npm test
 # Build all projects - Production Images & Push to Docker Hub
 after_success:
   - docker build -t appymango/docker-mern-client ./client
   - docker build -t appymango/docker-mern-nginx ./nginx
   - docker build -t appymango/docker-mern-server ./server
   - docker build -t appymango/docker-mern-worker ./worker
-
-  # Authorize Docker
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-  # Push to Docker Hub
+  # Push Images to Docker Hub
   - docker push appymango/docker-mern-client
   - docker push appymango/docker-mern-nginx
   - docker push appymango/docker-mern-server
   - docker push appymango/docker-mern-worker
+
 deploy:
   provider: elasticbeanstalk
   region: "eu-central-1"
